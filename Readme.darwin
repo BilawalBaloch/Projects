@@ -1,0 +1,106 @@
+Here's a README for your GitHub repository based on the provided code and analysis of the Darwin Airport weather data.
+
+-----
+
+# Darwin Airport Weather Prediction
+
+This repository contains a machine learning project focused on predicting daily weather parameters (precipitation, maximum temperature, and minimum temperature) for Darwin Airport, Australia, using historical data from NOAA.
+
+## Project Overview
+
+The primary goal of this project is to build and evaluate a predictive model for key weather variables. The process involves:
+
+1.  **Data Ingestion and Initial Exploration**: Loading historical weather data, checking for missing values, and understanding data types.
+2.  **Data Preprocessing**: Handling missing values, cleaning column names, and preparing features for the machine learning model. Specifically, the 'date' column is transformed into a 'year\_feature' for use as a numerical input.
+3.  **Model Training**: Training a `RandomForestRegressor` model to predict precipitation (`prcp`), maximum temperature (`tmax`), and minimum temperature (`tmin`).
+4.  **Model Evaluation**: Assessing the model's performance using metrics like Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and R-squared ($R^2$).
+5.  **Error Analysis**: Detailed examination of prediction differences, particularly focusing on the largest errors for maximum temperature (`diff_tmax`), to identify areas where the model struggles.
+
+## Dataset
+
+The data used in this project is historical weather data for Darwin Airport, sourced from NOAA. It includes the following columns:
+
+  * **`STATION`**: Station ID.
+  * **`NAME`**: Station Name (DARWIN AIRPORT, AS).
+  * **`DATE`**: Date of observation.
+  * **`PRCP`**: Precipitation (in inches).
+  * **`TMAX`**: Maximum temperature (in Fahrenheit).
+  * **`TMIN`**: Minimum temperature (in Fahrenheit).
+
+The dataset covers observations from January 1, 2000, up to July 4, 2025.
+
+## Data Preprocessing Steps
+
+The following key preprocessing steps are applied to the raw data:
+
+1.  **Missing Value Handling**:
+      * Initial check for null values revealed a very small percentage of missing values in `TMAX` and `TMIN`.
+      * Missing values are imputed using the `ffill()` (forward fill) method.
+2.  **Column Renaming**: All column names are converted to lowercase for consistency.
+3.  **Feature Engineering**:
+      * The `DATE` column (object type) is converted to datetime objects.
+      * A new `year_feature` column is extracted from the `DATE` column, representing the year of the observation. This numerical feature is used as an input to the model.
+4.  **Data Type Conversion**: The DataFrame index is converted to datetime objects, although the primary date information for the model comes from `year_feature`.
+
+## Machine Learning Model
+
+  * **Model Type**: `RandomForestRegressor` from `scikit-learn`.
+  * **Features (`X`)**: The `year_feature` is used as the sole input feature for the model. `STATION` and `NAME` columns are dropped as they are categorical and constant for this dataset, and `PRCP`, `TMAX`, `TMIN` are target variables.
+  * **Targets (`y`)**: The model predicts `prcp`, `tmax`, and `tmin` simultaneously.
+  * **Train-Test Split**: The data is split into training (70%) and testing (30%) sets with `random_state=42` for reproducibility.
+
+## Model Evaluation
+
+After training, the model's performance on the test set is evaluated using:
+
+  * **Mean Squared Error (MSE)**: Measures the average of the squares of the errors.
+  * **Root Mean Squared Error (RMSE)**: The square root of MSE, providing error in the same units as the target variable.
+  * **R-squared ($R^2$) Score**: Indicates the proportion of the variance in the dependent variable that is predictable from the independent variable(s).
+
+**Current Model Evaluation Results:**
+
+```
+Model Evaluation:
+Mean Squared Error (MSE): 12.2032
+Root Mean Squared Error (RMSE): 3.4933
+R-squared (R2) Score: 0.0181
+```
+
+*Note: An R-squared score of 0.0181 suggests that the `year_feature` alone explains a very small portion of the variance in the weather variables, indicating that a more sophisticated model with additional features (e.g., historical lag features, seasonal components) would likely be necessary for accurate weather prediction.*
+
+## Detailed Error Analysis
+
+To gain deeper insights into the model's performance, a `combined_df` is created, merging the actual test values (`y_test_df`) and the predicted values (`y_pre_df`). This DataFrame also calculates the absolute differences for each predicted variable:
+
+  * `diff_prcp`: $|y\_{test\_prcp} - y\_{pre\_prcp}|$
+  * `diff_tmax`: $|y\_{test\_tmax} - y\_{pre\_tmax}|$
+  * `diff_tmin`: $|y\_{test\_tmin} - y\_{pre\_tmin}|$
+
+The `combined_df` is then sorted by `diff_tmax` in descending order to easily identify the dates where the model had the largest prediction errors for maximum temperature. This can be critical for understanding specific conditions or patterns that challenge the model's accuracy.
+
+## How to Run
+
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
+2.  **Install Dependencies**: Make sure you have `pandas`, `numpy`, `matplotlib`, `seaborn`, and `scikit-learn` installed.
+    ```bash
+    pip install pandas numpy matplotlib seaborn scikit-learn
+    ```
+3.  **Place Data File**: Ensure your `darwin.csv.csv` file is located in the `/content/` directory relative to where your script or notebook is run, or update the `pd.read_csv()` path accordingly.
+4.  **Execute the Code**: Run the Python script or Jupyter Notebook containing the provided code.
+
+## Future Enhancements
+
+  * **Feature Engineering**: Incorporate more relevant features, such as:
+      * Lagged values of `prcp`, `tmax`, `tmin` (e.g., previous day's weather).
+      * Seasonal features (month, day of week).
+      * Rolling averages or other statistical features.
+  * **Advanced Models**: Experiment with more complex time series models (e.g., ARIMA, Prophet) or deep learning models (e.g., LSTMs).
+  * **Hyperparameter Tuning**: Optimize the `RandomForestRegressor` or other models using techniques like GridSearchCV or RandomizedSearchCV.
+  * **Visualization**: Create more insightful visualizations for distributions, time series trends, and prediction errors.
+  * **Error Analysis Refinement**: Deeper investigation into the instances with high prediction errors to understand root causes.
+
+-----
