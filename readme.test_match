@@ -1,0 +1,89 @@
+I have performed the data cleaning and transformation steps as per your instructions.
+
+Here's a README for your GitHub repository based on the steps you've outlined and executed:
+
+-----
+
+# Test Match Cricket Batting Data Analysis
+
+This repository contains a Jupyter Notebook (`test_match_datacleaning.ipynb`) that demonstrates data cleaning, preprocessing, and feature engineering on a dataset of Test Match cricket batting statistics.
+
+## Project Overview
+
+The main goal of this project is to clean and prepare a raw dataset of Test Match batting records for potential future analysis or modeling. The notebook walks through various data manipulation techniques using the `pandas` library in Python.
+
+## Dataset
+
+The dataset used in this project is an Excel file named `test.match.data.xlsx`, which contains batting statistics for various Test Match cricketers.
+
+## Key Steps Performed
+
+The `test_match_datacleaning.ipynb` notebook covers the following data processing steps:
+
+1.  **Importing Libraries and Data:**
+
+      * Imported essential Python libraries such as `pandas`, `numpy`, `matplotlib.pyplot`, and `seaborn`.
+      * Loaded the `test.match.data.xlsx` file into a pandas DataFrame.
+
+2.  **Initial Data Inspection and Null Value Check:**
+
+      * Examined the first and last few rows of the DataFrame.
+      * Calculated the sum of null values for each column to identify missing data.
+
+3.  **Renaming Columns:**
+
+      * Renamed columns for better readability and consistency:
+          * `NO` to `Not_Out`
+          * `HS` to `highest_score`
+          * `BF` to `Ball_Faced`
+          * `SR` to `Strike_Rate`
+          * `Span` to `year_period`
+
+4.  **Handling Missing Values:**
+
+      * Filled remaining null values in `Not_Out`, `Ball_Faced`, and `Strike_Rate` columns using appropriate `fillna` methods (forward fill and backward fill).
+
+5.  **Duplicate Detection and Removal:**
+
+      * Checked for duplicate rows in the dataset.
+      * Removed any identified duplicate rows to ensure data uniqueness.
+
+6.  **Feature Engineering - Splitting Player Information:**
+
+      * Extracted `Player_Name` and `Country` into separate columns from the `Player` column using string manipulation and regular expressions.
+      * Cleaned up `Player_Name` by removing leading/trailing spaces.
+
+7.  **Feature Engineering - Creating Binary Indicator:**
+
+      * Created a new column `Not_Out_Status` which is `1` if a player was not out in any innings (i.e., `Not_Out` \> 0), and `0` otherwise.
+
+8.  **Feature Engineering - Splitting Year Period:**
+
+      * Divided the `year_period` column into `start_year` and `end_year` columns to represent the player's career span.
+
+9.  **Correcting Data Types:**
+
+      * Converted relevant columns to their appropriate data types (e.g., `highest_score`, `Ball_Faced`, `start_year`, `end_year` to integer/numeric types).
+      * Handled special characters (`*`, `+`, `-`) in numeric columns (`highest_score`, `Ball_Faced`) before type conversion.
+
+10. **Column Dropping:**
+
+      * Removed the original `Player` and `year_period` columns after extracting necessary information into new columns.
+
+## How to Use
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/BilawalBaloch/Projects.git
+    cd Projects
+    ```
+2.  **Place the dataset:**
+      * Ensure the `test.match.data.xlsx` file is in the same directory as the `test_match_datacleaning.ipynb` notebook.
+3.  **Install dependencies:**
+    ```bash
+    pip install pandas numpy matplotlib seaborn openpyxl
+    ```
+4.  **Run the notebook:**
+      * Open `test_match_datacleaning.ipynb` using Jupyter Notebook or JupyterLab and run all cells.
+
+-----
