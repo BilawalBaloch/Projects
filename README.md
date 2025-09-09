@@ -146,6 +146,52 @@ Model training complete.
 Making predictions on the test set...
 Predictions complete.
 ------------------------------
+.
+..
+.
+.
+.
+.
+.
+.
+Simple TensorFlow MNIST Classifier
+This repository contains a basic and fully functional TensorFlow project for training an image classification model on the MNIST dataset. It's designed as a starting point for anyone new to machine learning with TensorFlow and Keras.
+
+The script train_model.py performs the following steps:
+
+Loads the built-in MNIST dataset of handwritten digits.
+
+Pre-processes the image data by normalizing pixel values.
+
+Builds a simple neural network model.
+
+Trains the model for 5 epochs.
+
+Evaluates the model's accuracy on a test set.
+
+Saves the trained model to a file named mnist_model.h5.
+
+Prerequisites
+To run this project, you will need to have Python and the following libraries installed:
+
+tensorflow
+
+keras
+
+numpy
+
+matplotlib (optional, for plotting)
+
+You can install the necessary dependencies using pip:
+
+pip install tensorflow keras numpy matplotlib
+
+How to Run
+Simply execute the Python script from your terminal:
+
+python train_model.py
+
+The script will output the training progress and the final test accuracy. After it completes, you will find a file named mnist_model.h5 in the project directory, which contains the trained model.
 Evaluating model performance:
 Mean Squared Error (MSE): 2.94
 R-squared (R2) Score: 0.96
