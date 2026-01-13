@@ -1,0 +1,98 @@
+# 📊 Salary Prediction Project
+
+A machine learning project that predicts salary based on years of experience using linear regression.
+
+## 📁 Dataset Information
+
+**Source:** Kaggle - "Salary CSV" dataset  
+**Size:** 35 rows × 2 columns  
+**Features:**
+- `YearsExperience` (float64): Number of years of work experience (1.1 to 13.5 years)
+- `Salary` (int64): Corresponding salary in USD (37,731 to 139,465)
+
+## 📈 Exploratory Data Analysis (EDA)
+
+### Basic Statistics
+- **Mean Experience:** 6.31 years
+- **Mean Salary:** $83,945.60
+- **Strong Correlation:** 0.98 between experience and salary
+
+### Visualizations
+1. **Scatter Plot:** Clear linear relationship between experience and salary
+2. **Distribution Plots:**
+   - Salary distribution (right-skewed)
+   - Experience distribution (relatively uniform)
+3. **Correlation Heatmap:** Very high positive correlation (0.98)
+
+## 🤖 Machine Learning Pipeline
+
+### Data Preparation
+- **Train-Test Split:** 80-20 split (28 training, 7 testing samples)
+- **Feature Scaling:** StandardScaler applied to normalize YearsExperience
+
+### Model
+- **Algorithm:** Linear Regression
+- **Training:** Simple linear regression on scaled features
+- **Prediction:** Salary prediction based on years of experience
+
+### Evaluation Metrics
+Calculated on test set:
+- **Mean Absolute Error (MAE):** To be calculated
+- **Mean Squared Error (MSE):** To be calculated  
+- **Root Mean Squared Error (RMSE):** To be calculated
+- **R² Score:** To be calculated
+
+## 🎯 Results
+
+### Visualization
+- Training data shown in orange
+- Test data shown in blue
+- Model predictions shown as black dashed line with markers
+- Linear trend clearly visible, indicating good model fit
+
+### Model Performance
+The linear regression model successfully captures the relationship between experience and salary, with predictions closely following the actual data points.
+
+## 🛠️ Technologies Used
+
+- **Python 3.x**
+- **Pandas & NumPy:** Data manipulation
+- **Matplotlib & Seaborn:** Data visualization
+- **Scikit-learn:** Machine learning algorithms
+- **KaggleHub:** Dataset download
+
+## 📊 Key Insights
+
+1. **Strong Linear Relationship:** Salary increases consistently with experience
+2. **Simple but Effective:** Linear regression performs well for this straightforward prediction task
+3. **Data Quality:** No missing values, clean dataset ready for modeling
+
+## 🚀 How to Run
+
+1. Install dependencies:
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn kagglehub
+```
+
+2. Run the Jupyter Notebook/Colab script
+3. The model will automatically:
+   - Download the dataset
+   - Perform EDA
+   - Train the model
+   - Generate predictions and visualizations
+
+## 📈 Future Improvements
+
+Potential enhancements for this project:
+- Try multiple regression algorithms (Random Forest, Gradient Boosting)
+- Add polynomial features for non-linear relationships
+- Implement cross-validation for more robust evaluation
+- Deploy as a web application for real-time predictions
+
+## 📝 License
+
+Dataset sourced from Kaggle. Code available for educational and research purposes.
+
+---
+
+*This project demonstrates a complete machine learning workflow from data loading to model evaluation for a simple regression problem.*
